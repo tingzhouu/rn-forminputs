@@ -11,7 +11,6 @@ class MenuPage extends Component {
   }
 
   render() {
-    console.log('this.props', this.props);
     const { shows } = this.props;
     return (
       <View style={styles.container}>
