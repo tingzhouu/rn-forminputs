@@ -16,9 +16,12 @@ class MenuPage extends Component {
   }
 
   render() {
-    const { shows } = this.props;
+    const { shows, isGettingForm } = this.props;
     return (
       <View style={styles.container}>
+        {isGettingForm && (
+          <View style={{ height: 200, width: 200, backgroundColor: 'red'}} />
+        )}
         <Text style={styles.menuTitle}>MenuPage</Text>
         <Text style={styles.showCount}>{`Number of Shows: ${shows.length}`}</Text>
         <Button
@@ -55,6 +58,8 @@ const mapStateToProps = state => {
   return {
     shows: state.showList.shows,
     form: state.form.form,
+    isGettingForm: state.form.isGettingForm,
+    getFormError: state.form.getFormError,
   }
 };
 

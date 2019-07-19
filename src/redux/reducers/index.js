@@ -5,7 +5,9 @@ const initialStateShows = {
 };
 
 const initialStateForm = {
+  isGettingForm: false,
   form: null,
+  getFormError: null,
 };
 
 const showList = (state = initialStateShows, action) => {
@@ -22,11 +24,25 @@ const showList = (state = initialStateShows, action) => {
 
 const form = (state = initialStateForm, action) => {
   switch (action.type) {
-    case 'GET_FORM':
+    case 'IS_GETTING_FORM':
+      return {
+        ...state,
+        isGettingForm: true,
+        
+      }
+    case 'GET_FORM_SUCCESS':
       return {
         ...state,
         form: action.payload,
+        isGettingForm: false
       };
+    case 'GET_FORM_ERROR':
+      return {
+        ...state,
+        getFormError: action.payload,
+        isGettingForm: false
+      };
+    
     default:
       return state;
   }

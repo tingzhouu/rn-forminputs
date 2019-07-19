@@ -33,8 +33,21 @@ export const addShow = show => {
 };
 
 export const getForm = () => {
-  return {
-    type: GET_FORM,
-    payload: formPayload,
-  };
-};
+  return async (dispatch) => {
+    dispatch({
+      type: 'IS_GETTING_FORM',
+    });
+    try {
+      const result = await mimicAPICallForForm();
+      dispatch({
+        type: 'GET_FORM_SUCCESS',
+        payload: result,
+      });
+    } catch (error) {
+      dispatch({
+        type: 'GET_FORM_ERROR',
+        payload: error,
+      })
+    }
+  }
+}
