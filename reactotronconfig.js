@@ -1,9 +1,14 @@
-import Reactotron from 'reactotron-react-native'
+import Reactotron from 'reactotron-react-native';
+import { reactotronRedux } from 'reactotron-redux';
+
 console.disableYellowBox = true;
 
-Reactotron
-  .configure() // controls connection & communication settings
-  .useReactNative() // add all built-in react native plugins
-  .connect() // let's connect!
+const reactotron = Reactotron
+  .configure({ name: 'React Native Demo' })
+  .use(reactotronRedux()) //  <- here i am!
+  .connect() //Don't forget about me!
 
 console.log = Reactotron.log;
+
+export default reactotron;
+
