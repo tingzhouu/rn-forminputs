@@ -1,0 +1,62 @@
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { connect } from 'react-redux';
+
+import { addShow } from '../redux/actions';
+
+class MenuPage extends Component {
+  onPressAddShow = () => {
+    const { doAddShow } = this.props;
+    doAddShow('This is a show!');
+  }
+
+  render() {
+    console.log('this.props', this.props);
+    const { shows } = this.props;
+    return (
+      <View style={styles.container}>
+        <Text style={styles.menuTitle}>MenuPage</Text>
+        <Text style={styles.showCount}>{`Number of Shows: ${shows.length}`}</Text>
+        <Button
+          onPress={this.onPressAddShow}
+          title="Add Count"
+          color="orange"
+          style={styles.button}
+        />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 20,
+  },
+  menuTitle: {
+    fontSize: 24,
+    fontWeight: '800',
+    marginVertical: 20,
+  },
+  showCount: {
+    fontSize: 20,
+    fontWeight: '800',
+  },
+  button: {
+    borderColor: 'red', borderWidth: 2,
+  }
+});
+
+const mapStateToProps = state => {
+  return {
+    shows: state.showList.shows,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    doAddShow: (showName) => dispatch(addShow(showName)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuPage);
