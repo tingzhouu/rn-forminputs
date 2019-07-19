@@ -15,6 +15,16 @@ const formPayload = [
   },
 ]
 
+const mimicAPICallForForm = async () => {
+  await new Promise(resolve => {
+    setTimeout(() => {
+      console.log('done');
+      resolve();
+    }, 3000);
+  });
+  return formPayload;
+}
+
 export const addShow = show => {
   return {
     type: ADD_SHOW,
@@ -22,7 +32,7 @@ export const addShow = show => {
   };
 };
 
-export const getForm = show => {
+export const getForm = () => {
   return {
     type: GET_FORM,
     payload: formPayload,
