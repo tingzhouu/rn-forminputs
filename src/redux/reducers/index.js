@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux';
 
-const initialState = {
+const initialStateShows = {
   shows: [],
 };
 
-const showList = (state = initialState, action) => {
+const initialStateForm = {
+  form: null,
+};
+
+const showList = (state = initialStateShows, action) => {
   switch (action.type) {
     case 'ADD_SHOW':
       return {
@@ -16,6 +20,19 @@ const showList = (state = initialState, action) => {
   }
 };
 
+const form = (state = initialStateForm, action) => {
+  switch (action.type) {
+    case 'GET_FORM':
+      return {
+        ...state,
+        form: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
-  showList
+  showList,
+  form,
 });

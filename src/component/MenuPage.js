@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { connect } from 'react-redux';
 
-import { addShow } from '../redux/actions';
+import { addShow, getForm } from '../redux/actions';
 
 class MenuPage extends Component {
   onPressAddShow = () => {
     const { doAddShow } = this.props;
     doAddShow('This is a show!');
+  }
+
+  componentDidMount() {
+    const { doGetForm } = this.props;
+    doGetForm();
   }
 
   render() {
@@ -49,12 +54,14 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     shows: state.showList.shows,
+    form: state.form.form,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     doAddShow: (showName) => dispatch(addShow(showName)),
+    doGetForm: () => dispatch(getForm())
   };
 };
 
